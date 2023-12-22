@@ -28,7 +28,7 @@ public class EmailConstantsTest {
     @SuppressWarnings("deprecation")
     @Test
     public void test_SOCKET_TIMEOUT() {
-        assertEquals(EmailConstants.SOCKET_TIMEOUT, Duration.ofMillis(EmailConstants.SOCKET_TIMEOUT_MS));
+        assertEquals(EmailConstants.SOCKET_TIMEOUT, Duration.ofMillis(EmailConstants.SOCKET_TIMEOUT.toMillis()));
     }
 
 }
