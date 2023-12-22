@@ -928,16 +928,7 @@ public abstract class Email {
         return sendPartial;
     }
 
-    /**
-     * Tests whether SSL/TLS encryption for the transport is currently enabled (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
-     *
-     * @return true if SSL enabled for the transport.
-     * @deprecated since 1.3, use {@link #isSSLOnConnect()} instead.
-     */
-    @Deprecated
-    public boolean isSSL() {
-        return isSSLOnConnect();
-    }
+
 
     /**
      * Tests whether the server identity checked as specified by RFC 2595
@@ -979,17 +970,7 @@ public abstract class Email {
         return startTlsRequired;
     }
 
-    /**
-     * Tests whether the client is configured to try to enable STARTTLS. See EMAIL-105 for reason of deprecation.
-     *
-     * @deprecated since 1.3, use {@link #isStartTLSEnabled()} instead.
-     * @return true if using STARTTLS for authentication, false otherwise.
-     * @since 1.1
-     */
-    @Deprecated
-    public boolean isTLS() {
-        return isStartTLSEnabled();
-    }
+
 
     /**
      * Sends the email. Internally we build a MimeMessage which is afterwards sent to the SMTP server.
@@ -1480,19 +1461,6 @@ public abstract class Email {
         this.socketConnectionTimeout = Math.toIntExact(socketConnectionTimeout.toMillis());
     }
 
-    /**
-     * Sets the socket connection timeout value in milliseconds. Default is a 60 second timeout.
-     *
-     * @param socketConnectionTimeout the connection timeout
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.2
-     * @deprecated Use {@link #setSocketConnectionTimeout(Duration)}.
-     */
-    @Deprecated
-    public void setSocketConnectionTimeout(final int socketConnectionTimeout) {
-        checkSessionAlreadyInitialized();
-        this.socketConnectionTimeout = socketConnectionTimeout;
-    }
 
     /**
      * Sets the socket I/O timeout value in milliseconds. Default is 60 second timeout.
@@ -1506,30 +1474,7 @@ public abstract class Email {
         this.socketTimeout = Math.toIntExact(socketTimeout.toMillis());
     }
 
-    /**
-     * Sets the socket I/O timeout value in milliseconds. Default is 60 second timeout.
-     *
-     * @param socketTimeout the socket I/O timeout
-     * @throws IllegalStateException if the mail session is already initialized
-     * @since 1.2
-     * @deprecated Use {@link #setSocketTimeout(Duration)}.
-     */
-    @Deprecated
-    public void setSocketTimeout(final int socketTimeout) {
-        checkSessionAlreadyInitialized();
-        this.socketTimeout = socketTimeout;
-    }
 
-    /**
-     * Sets whether SSL/TLS encryption should be enabled for the SMTP transport upon connection (SMTPS/POPS). See EMAIL-105 for reason of deprecation.
-     *
-     * @param ssl whether to enable the SSL transport
-     * @deprecated since 1.3, use {@link #setSSLOnConnect(boolean)} instead.
-     */
-    @Deprecated
-    public void setSSL(final boolean ssl) {
-        setSSLOnConnect(ssl);
-    }
 
     /**
      * Sets whether the server identity is checked as specified by RFC 2595
@@ -1618,18 +1563,6 @@ public abstract class Email {
     public Email setSubject(final String aSubject) {
         this.subject = EmailUtils.replaceEndOfLineCharactersWithSpaces(aSubject);
         return this;
-    }
-
-    /**
-     * Sets or disable the STARTTLS encryption. Please see EMAIL-105 for the reasons of deprecation.
-     *
-     * @param withTLS true if STARTTLS requested, false otherwise
-     * @since 1.1
-     * @deprecated since 1.3, use {@link #setStartTLSEnabled(boolean)} instead.
-     */
-    @Deprecated
-    public void setTLS(final boolean withTLS) {
-        setStartTLSEnabled(withTLS);
     }
 
     /**
