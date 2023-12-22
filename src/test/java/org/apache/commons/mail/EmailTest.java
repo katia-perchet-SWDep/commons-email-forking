@@ -1043,7 +1043,7 @@ public class EmailTest extends AbstractEmailTest {
     @Test
     public void testSocketConnectionTimeout() {
         assertEquals(EmailConstants.SOCKET_TIMEOUT.toMillis(), email.getSocketConnectionTimeout());
-        email.setSocketConnectionTimeout(Duration.ofSeconds(1234));
+        email.setSocketConnectionTimeout(Duration.ofMillis(1234));
         assertEquals(1234, email.getSocketConnectionTimeout());
         email.setSocketConnectionTimeout(Duration.ofMillis(5678));
         assertEquals(5678, email.getSocketConnectionTimeout());
@@ -1052,7 +1052,7 @@ public class EmailTest extends AbstractEmailTest {
     @Test
     public void testSocketTimeout() {
         assertEquals(EmailConstants.SOCKET_TIMEOUT.toMillis(), email.getSocketTimeout());
-        email.setSocketTimeout(Duration.ofSeconds(1234));
+        email.setSocketTimeout(Duration.ofMillis(1234));
         assertEquals(1234, email.getSocketTimeout());
         email.setSocketTimeout(Duration.ofMillis(5678));
         assertEquals(5678, email.getSocketTimeout());
