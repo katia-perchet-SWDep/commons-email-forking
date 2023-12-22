@@ -190,7 +190,7 @@ public class HtmlEmail extends MultiPartEmail {
 
         // determine how to form multiparts of email
 
-        if (EmailUtils.isNotEmpty(html) && !EmailUtils.isEmpty(inlineEmbeds)) {
+        if (EmailUtils.isNotEmpty(getHtml()) && !EmailUtils.isEmpty(inlineEmbeds)) {
             // If HTML body and embeds are used, create a related container and add it to the root container
             bodyEmbedsContainer = new MimeMultipart("related");
             bodyContainer = bodyEmbedsContainer;
