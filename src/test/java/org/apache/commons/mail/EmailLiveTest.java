@@ -35,6 +35,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.resolver.DataSourceUrlResolver;
 import org.apache.commons.mail.settings.EmailConfiguration;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -125,7 +126,9 @@ class EmailLiveTest extends AbstractEmailTest {
         final DataSource attachment = new javax.mail.util.ByteArrayDataSource(textMsg.getBytes(StandardCharsets.UTF_8), "text/plain");
         email.attach(attachment, attachmentName, "Attachment in Greek");
 
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/correct-encoding.eml"), send(email).getMimeMessage());
+        MimeMessage message= send(email).getMimeMessage();
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/correct-encoding.eml"), message);
+        Assertions.assertNotNull(message);
     }
 
     /**
@@ -140,7 +143,9 @@ class EmailLiveTest extends AbstractEmailTest {
         email.setMsg("This is a test mail with a folded header value... :-)");
         email.addHeader("X-TestHeader", "This is a very long header value which should be folded into two lines, hopefully");
 
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/foldedheader.eml"), send(email).getMimeMessage());
+        MimeMessage message= send(email).getMimeMessage();
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/foldedheader.eml"), message);
+        Assertions.assertNotNull(message);
     }
 
     /**
@@ -219,7 +224,9 @@ class EmailLiveTest extends AbstractEmailTest {
         htmlEmail4.setHtmlMsg(htmlMsg);
         htmlEmail4.attach(attachment);
 
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/htmlemail4.eml"), send(htmlEmail4).getMimeMessage());
+        MimeMessage message=send(htmlEmail4).getMimeMessage();
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/htmlemail4.eml"), message);
+        Assertions.assertNotNull(message);
     }
 
     /**
@@ -260,7 +267,9 @@ class EmailLiveTest extends AbstractEmailTest {
             email.setSubject("[testImageHtmlEmail] 2.Test: complex html content");
             email.setHtmlMsg(htmlMsg);
 
-            EmailUtils.writeMimeMessage(new File("./target/test-emails/testImageHtmlEmailRemote.eml"), send(email).getMimeMessage());
+            MimeMessage message= send(email).getMimeMessage();
+            EmailUtils.writeMimeMessage(new File("./target/test-emails/testImageHtmlEmailRemote.eml"), message);
+            Assertions.assertNotNull(message);
         }
     }
 
@@ -276,7 +285,9 @@ class EmailLiveTest extends AbstractEmailTest {
         email.setMsg("This is a test mail ... :-)");
         email.attach(new File("./src/test/resources/attachments/logo.pdf"));
 
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
+        MimeMessage message= send(email).getMimeMessage();
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/multipart.eml"), message);
+        Assertions.assertNotNull(message);
     }
 
     /**
@@ -291,7 +302,9 @@ class EmailLiveTest extends AbstractEmailTest {
         email.setMsg("This is a test mail ... :-)");
         email.attach(Paths.get("./src/test/resources/attachments/logo.pdf"));
 
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/multipart.eml"), send(email).getMimeMessage());
+        MimeMessage message= send(email).getMimeMessage();
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/multipart.eml"), message);
+        Assertions.assertNotNull(message);
     }
 
     /**
@@ -311,7 +324,9 @@ class EmailLiveTest extends AbstractEmailTest {
 
         email.setSendPartial(true);
 
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/partialmail.eml"), send(email).getMimeMessage());
+        MimeMessage message= send(email).getMimeMessage();
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/partialmail.eml"), message);
+        Assertions.assertNotNull(message);
     }
 
     /**
@@ -364,7 +379,9 @@ class EmailLiveTest extends AbstractEmailTest {
         email.setSubject("TestSimpleMail");
         email.setMsg("This is a test mail ... :-)");
 
-        EmailUtils.writeMimeMessage(new File("./target/test-emails/simplemail.eml"), send(email).getMimeMessage());
+        MimeMessage message= send(email).getMimeMessage();
+        EmailUtils.writeMimeMessage(new File("./target/test-emails/simplemail.eml"), message);
+        Assertions.assertNotNull(message);
     }
 
 }
