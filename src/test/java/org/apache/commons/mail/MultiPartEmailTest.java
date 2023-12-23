@@ -36,7 +36,7 @@ import org.apache.commons.mail.mocks.MockMultiPartEmailConcrete;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class MultiPartEmailTest extends AbstractEmailTest {
+class MultiPartEmailTest extends AbstractEmailTest {
 
     /** */
     private MockMultiPartEmailConcrete email;

@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 1.0
  */
-public class InvalidAddressTest extends AbstractEmailTest {
+class InvalidAddressTest extends AbstractEmailTest {
 
     // @formatter:off
     private static final String[] ARR_INVALID_EMAILS = {

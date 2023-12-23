@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 1.0
  */
-public class SendWithAttachmentsTest extends AbstractEmailTest {
+class SendWithAttachmentsTest extends AbstractEmailTest {
     private MockHtmlEmailConcrete email;
 
     @BeforeEach
