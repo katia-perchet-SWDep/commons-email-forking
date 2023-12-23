@@ -167,6 +167,8 @@ public class HtmlEmail extends MultiPartEmail {
 
     protected Map<String, InlineImage> inlineEmbeds = new HashMap<>();
 
+    String existingMessage = "; existing names cannot be rebound";
+
     /**
      * Constructs a new instance.
      */
@@ -189,6 +191,7 @@ public class HtmlEmail extends MultiPartEmail {
 
         // determine how to form multiparts of email
 
+        String subtype = "alternative";
         if (EmailUtils.isNotEmpty(getHtml()) && !EmailUtils.isEmpty(inlineEmbeds)) {
             // If HTML body and embeds are used, create a related container and add it to the root container
             bodyEmbedsContainer = new MimeMultipart("related");
@@ -197,7 +200,7 @@ public class HtmlEmail extends MultiPartEmail {
 
             // If TEXT body was specified, create a alternative container and add it to the embeds container
             if (EmailUtils.isNotEmpty(getText())) {
-                bodyContainer = new MimeMultipart("alternative");
+                bodyContainer = new MimeMultipart(subtype);
                 final BodyPart bodyPart = createBodyPart();
                 try {
                     bodyPart.setContent(bodyContainer);
@@ -214,12 +217,12 @@ public class HtmlEmail extends MultiPartEmail {
             if (!EmailUtils.isEmpty(inlineEmbeds) || isBoolHasAttachments()) {
                 // If both HTML and TEXT bodies are provided, create an alternative
                 // container and add it to the root container
-                bodyContainer = new MimeMultipart("alternative");
+                bodyContainer = new MimeMultipart(subtype);
                 this.addPart(bodyContainer, 0);
             } else {
                 // no attachments or embedded images present, change the mimetype
                 // of the root container (= body container)
-                rootContainer.setSubType("alternative");
+                rootContainer.setSubType(subtype);
             }
         }
 
@@ -295,8 +298,9 @@ public class HtmlEmail extends MultiPartEmail {
             if (dataSource.equals(inlineImage.getDataSource())) {
                 return inlineImage.getCid();
             }
+
             throw new EmailException("embedded DataSource '" + name + "' is already bound to name " + inlineImage.getDataSource().toString()
-                    + "; existing names cannot be rebound");
+                    + existingMessage);
         }
 
         final String cid = EmailUtils.toLower(EmailUtils.randomAlphabetic(HtmlEmail.CID_LENGTH));
@@ -390,18 +394,19 @@ public class HtmlEmail extends MultiPartEmail {
                 return inlineImage.getCid();
             }
             throw new EmailException(
-                    "embedded name '" + file.getName() + "' is already bound to file " + existingFilePath + "; existing names cannot be rebound");
+                    "embedded name '" + file.getName() + "' is already bound to file " + existingFilePath + existingMessage);
         }
 
         // verify that the file is valid
+        String fileS = "file ";
         if (!file.exists()) {
-            throw new EmailException("file " + filePath + " doesn't exist");
+            throw new EmailException(fileS + filePath + " doesn't exist");
         }
         if (!file.isFile()) {
-            throw new EmailException("file " + filePath + " isn't a normal file");
+            throw new EmailException(fileS + filePath + " isn't a normal file");
         }
         if (!file.canRead()) {
-            throw new EmailException("file " + filePath + " isn't readable");
+            throw new EmailException(fileS + filePath + " isn't readable");
         }
 
         return embed(new FileDataSource(file), file.getName(), cid);
@@ -466,7 +471,7 @@ public class HtmlEmail extends MultiPartEmail {
             if (url.toExternalForm().equals(urlDataSource.getURL().toExternalForm())) {
                 return inlineImage.getCid();
             }
-            throw new EmailException("embedded name '" + name + "' is already bound to URL " + urlDataSource.getURL() + "; existing names cannot be rebound");
+            throw new EmailException("embedded name '" + name + "' is already bound to URL " + urlDataSource.getURL() + existingMessage);
         }
         // verify that the URL is valid
         try (InputStream inputStream = url.openStream()) {

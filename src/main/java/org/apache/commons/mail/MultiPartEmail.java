@@ -144,12 +144,13 @@ public class MultiPartEmail extends Email {
      * @since 1.0
      */
     public MultiPartEmail attach(final DataSource dataSource, final String name, final String description) throws EmailException {
-        EmailException.checkNonNull(dataSource, () -> "Invalid Datasource.");
+        String invalidDatasourceMessage = "Invalid Datasource.";
+        EmailException.checkNonNull(dataSource, () -> invalidDatasourceMessage);
         // verify that the DataSource is valid
         try (InputStream inputStream = dataSource.getInputStream()) {
-            EmailException.checkNonNull(inputStream, () -> "Invalid Datasource.");
+            EmailException.checkNonNull(inputStream, () -> invalidDatasourceMessage);
         } catch (final IOException e) {
-            throw new EmailException("Invalid Datasource.", e);
+            throw new EmailException(invalidDatasourceMessage, e);
         }
         return attach(dataSource, name, description, EmailAttachment.ATTACHMENT);
     }
@@ -184,6 +185,8 @@ public class MultiPartEmail extends Email {
         return this;
     }
 
+    String notExistsMessage="\" does not exist";
+    String cannotAttachMsg="Cannot attach file \"";
     /**
      * Attaches an EmailAttachment.
      *
@@ -202,11 +205,11 @@ public class MultiPartEmail extends Email {
                 fileName = attachment.getPath();
                 final File file = new File(fileName);
                 if (!file.exists()) {
-                    throw new IOException("\"" + fileName + "\" does not exist");
+                    throw new IOException("\"" + fileName + notExistsMessage);
                 }
                 result = attach(new FileDataSource(file), attachment.getName(), attachment.getDescription(), attachment.getDisposition());
             } catch (final IOException e) {
-                throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
+                throw new EmailException(cannotAttachMsg + fileName + "\"", e);
             }
         } else {
             result = attach(url, attachment.getName(), attachment.getDescription(), attachment.getDisposition());
@@ -226,11 +229,11 @@ public class MultiPartEmail extends Email {
         final String fileName = file.getAbsolutePath();
         try {
             if (!file.exists()) {
-                throw new IOException("\"" + fileName + "\" does not exist");
+                throw new IOException("\"" + fileName + notExistsMessage);
             }
             return attach(new FileDataSource(file), file.getName(), null, EmailAttachment.ATTACHMENT);
         } catch (final IOException e) {
-            throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
+            throw new EmailException(cannotAttachMsg + fileName + "\"", e);
         }
     }
 
@@ -247,12 +250,12 @@ public class MultiPartEmail extends Email {
         final Path fileName = file.toAbsolutePath();
         try {
             if (!Files.exists(file)) {
-                throw new IOException("\"" + fileName + "\" does not exist");
+                throw new IOException("\"" + fileName + notExistsMessage);
             }
             return attach(new PathDataSource(file, FileTypeMap.getDefaultFileTypeMap(), options), Objects.toString(file.getFileName(), null), null,
                     EmailAttachment.ATTACHMENT);
         } catch (final IOException e) {
-            throw new EmailException("Cannot attach file \"" + fileName + "\"", e);
+            throw new EmailException(cannotAttachMsg + fileName + "\"", e);
         }
     }
 
