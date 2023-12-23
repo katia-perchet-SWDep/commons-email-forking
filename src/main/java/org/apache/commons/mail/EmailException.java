@@ -23,6 +23,7 @@ import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.concurrent.Callable;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 /**
@@ -49,8 +50,8 @@ public class EmailException extends Exception {
         }
     }
 
-    static <T> T check(final Supplier<Boolean> test, final T subject, final Supplier<String> message) throws EmailException {
-        if (test.get()) {
+    static <T> T check(final BooleanSupplier test, final T subject, final Supplier<String> message) throws EmailException {
+        if (Boolean.TRUE.equals(test.getAsBoolean())) {
             throw new EmailException(message.get());
         }
         return subject;
