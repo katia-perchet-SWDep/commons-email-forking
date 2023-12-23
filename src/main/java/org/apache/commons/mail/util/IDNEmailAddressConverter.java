@@ -77,7 +77,9 @@ public class IDNEmailAddressConverter {
         if (idx < 0) {
             return email;
         }
-        return getLocalPart(email, idx) + '@' + converter.apply(getDomainPart(email, idx));
+        else {
+            return getLocalPart(email, idx) + '@' + converter.apply(getDomainPart(email, idx));
+        }
     }
 
     /**
