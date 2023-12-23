@@ -144,13 +144,8 @@ public class ImageHtmlEmail extends HtmlEmail {
                     name = resourceLocation;
                 }
 
-                String cid = cidCache.get(name);
-
-                if (cid == null) {
-                    cid = embed(dataSource, name);
-                    cidCache.put(name, cid);
-                }
-
+                String cid= cidCache.containsKey(name) ? cidCache.get(name) : embed(dataSource,name);
+                cidCache.putIfAbsent(name, cid);
                 // if we embedded something, then we need to replace the URL with
                 // the CID, otherwise the Matcher takes care of adding the
                 // non-replaced text afterwards, so no else is necessary here!
