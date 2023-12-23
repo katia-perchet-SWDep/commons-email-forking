@@ -44,7 +44,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 1.0
  */
-public class HtmlEmailTest extends AbstractEmailTest {
+class HtmlEmailTest extends AbstractEmailTest {
 
     private MockHtmlEmailConcrete email;
 
@@ -87,7 +87,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
      * "http://paradisedelivery.homeip.net/delivery/?file=TZC268X93337..zip" contains TWO dots instead of one dot which breaks the link.
      */
     @Test
-    public void testAddZipUrl() throws Exception {
+    void testAddZipUrl() throws Exception {
         final String htmlMsg = "Please click on the following link: <br><br>"
                 + "<a href=\"http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip\">"
                 + "http://paradisedelivery.homeip.net/delivery/?file=3DTZC268X93337.zip" + "</a><br><br>Customer satisfaction is very important for us.";
@@ -125,7 +125,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
      * According to EMAIL-95 calling buildMimeMessage() before calling send() causes duplicate mime parts - now we throw an exception to catch the problem
      */
     @Test
-    public void testCallingBuildMimeMessageBeforeSent() throws Exception {
+    void testCallingBuildMimeMessageBeforeSent() throws Exception {
 
         final String htmlMsg = "<b>Hello World</b>";
 
@@ -151,7 +151,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testEmbedDataSource() throws Exception {
+    void testEmbedDataSource() throws Exception {
         final File tmpFile = File.createTempFile("testEmbedDataSource", "txt");
         tmpFile.deleteOnExit();
         final FileDataSource dataSource = new FileDataSource(tmpFile);
@@ -176,7 +176,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testEmbedFile() throws Exception {
+    void testEmbedFile() throws Exception {
         // Test Success
 
         final File file = File.createTempFile("testEmbedFile", "txt");
@@ -207,7 +207,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
      * see https://issues.apache.org/jira/browse/EMAIL-101
      */
     @Test
-    public void testEmbedFileWithCID() throws Exception {
+    void testEmbedFileWithCID() throws Exception {
         // Test Success
 
         final File file = File.createTempFile("testEmbedFile", "txt");
@@ -228,7 +228,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testEmbedUrl() throws Exception {
+    void testEmbedUrl() throws Exception {
         // Test Success
 
         final String strEmbed = email.embed(new URL(strTestURL), "Test name");
@@ -255,7 +255,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testEmbedUrlAndFile() throws Exception {
+    void testEmbedUrlAndFile() throws Exception {
         final File tmpFile = File.createTempFile("testfile", "txt");
         tmpFile.deleteOnExit();
         final String fileCid = email.embed(tmpFile);
@@ -267,7 +267,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetHtmlMsg() throws EmailException {
+    void testGetSetHtmlMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
             email.setHtmlMsg(validChar);
@@ -281,7 +281,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetMsg() throws EmailException {
+    void testGetSetMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
             email.setMsg(validChar);
@@ -297,7 +297,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetTextMsg() throws EmailException {
+    void testGetSetTextMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
             email.setTextMsg(validChar);
@@ -311,7 +311,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testHtmlMailMimeLayout() throws Exception {
+    void testHtmlMailMimeLayout() throws Exception {
         assertCorrectContentType("contentTypeTest.gif", "image/gif");
         assertCorrectContentType("contentTypeTest.jpg", "image/jpeg");
         assertCorrectContentType("contentTypeTest.png", "image/png");
@@ -322,7 +322,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
      * @throws IOException    if creating a temp file, URL or sending fails
      */
     @Test
-    public void testSend() throws EmailException, IOException {
+    void testSend() throws EmailException, IOException {
         final EmailAttachment attachment = new EmailAttachment();
 
         /* File to used to test file attachments (Must be valid) */
@@ -396,7 +396,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testSend2() throws Exception {
+    void testSend2() throws Exception {
         // Test Success
 
         getMailServer();
@@ -456,7 +456,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
 
     @Test
     @Disabled
-    public void testSendWithDefaultCharset() throws Exception {
+    void testSendWithDefaultCharset() throws Exception {
         // Test is disabled as its result is dependent on the execution order:
         // the mail.mime.charset property is normally cached by the MimeUtility
         // class, thus setting it to another value while running the tests
@@ -495,7 +495,7 @@ public class HtmlEmailTest extends AbstractEmailTest {
      * EMAIL-73 - check that providing a plain text content using setMsg() creates a plain content and HTML content.
      */
     @Test
-    public void testSendWithPlainTextButNoHtmlContent() throws EmailException, IOException {
+    void testSendWithPlainTextButNoHtmlContent() throws EmailException, IOException {
         getMailServer();
 
         final String strSubject = "testSendWithPlainTextButNoHtmlContent";

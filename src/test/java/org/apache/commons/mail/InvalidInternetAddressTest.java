@@ -72,7 +72,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
     // @formatter:on
 
     @Test
-    public void testStrictConstructor() throws Exception {
+    void testStrictConstructor() throws Exception {
         // Prove InternetAddress constructor is throwing exception.
 
         // test Invalid Email addresses
@@ -88,7 +88,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testValidateMethod() throws Exception {
+    void testValidateMethod() throws Exception {
         // Prove InternetAddress constructor isn't throwing exception and
         // the validate() method is
 
@@ -118,7 +118,7 @@ public class InvalidInternetAddressTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testValidateMethodCharset() throws Exception {
+    void testValidateMethodCharset() throws Exception {
         // Prove InternetAddress constructor isn't throwing exception and
         // the validate() method is
 

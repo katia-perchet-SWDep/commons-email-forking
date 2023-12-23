@@ -26,10 +26,10 @@ import org.junit.jupiter.api.Test;
  *
  * @since 1.3
  */
-public class EmailUtilsTest {
+class EmailUtilsTest {
 
     @Test
-    public void testClearEndOfLineCharacters() {
+    void testClearEndOfLineCharacters() {
         assertEquals(null, EmailUtils.replaceEndOfLineCharactersWithSpaces(null));
         assertEquals("", EmailUtils.replaceEndOfLineCharactersWithSpaces(""));
         assertEquals("   ", EmailUtils.replaceEndOfLineCharactersWithSpaces("   "));
@@ -41,7 +41,7 @@ public class EmailUtilsTest {
     }
 
     @Test
-    public void testUrlEncoding() {
+    void testUrlEncoding() {
         assertEquals("abcdefg", EmailUtils.encodeUrl("abcdefg"));
         assertEquals("0123456789", EmailUtils.encodeUrl("0123456789"));
         assertEquals("Test%20CID", EmailUtils.encodeUrl("Test CID"));

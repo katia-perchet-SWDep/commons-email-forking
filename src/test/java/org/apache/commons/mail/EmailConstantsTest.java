@@ -23,11 +23,11 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.Test;
 
-public class EmailConstantsTest {
+class EmailConstantsTest {
 
     @SuppressWarnings("deprecation")
     @Test
-    public void test_SOCKET_TIMEOUT() {
+    void test_SOCKET_TIMEOUT() {
         assertEquals(EmailConstants.SOCKET_TIMEOUT, Duration.ofMillis(EmailConstants.SOCKET_TIMEOUT.toMillis()));
     }
 

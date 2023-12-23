@@ -56,7 +56,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAddPart() throws Exception {
+    void testAddPart() throws Exception {
         // setup
         email = new MockMultiPartEmailConcrete();
         final String strMessage = "hello";
@@ -69,7 +69,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAddPart2() throws Exception {
+    void testAddPart2() throws Exception {
         // setup
         email = new MockMultiPartEmailConcrete();
         final String strSubtype = "subtype/abc123";
@@ -84,7 +84,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
      * @throws EmailException        when a bad address or attachment is used
      */
     @Test
-    public void testAttach2() throws MalformedURLException, EmailException {
+    void testAttach2() throws MalformedURLException, EmailException {
         // Test Success - URL
         email.attach(new URL(strTestURL), "Test Attachment", "Test Attachment Desc");
         // bad name
@@ -92,7 +92,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAttach3() throws Exception {
+    void testAttach3() throws Exception {
         // Test Success - URL
         email.attach(new URLDataSource(new URL(strTestURL)), "Test Attachment", "Test Attachment Desc");
         // Test Exceptions
@@ -103,7 +103,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAttachFile() throws Exception {
+    void testAttachFile() throws Exception {
         final EmailAttachment attachment1;
         // Test Success - EmailAttachment
         attachment1 = new EmailAttachment();
@@ -136,7 +136,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAttachFileLocking() throws Exception {
+    void testAttachFileLocking() throws Exception {
         // EMAIL-120: attaching a FileDataSource may result in a locked file
         // resource on windows systems
         final File tmpFile = File.createTempFile("attachment", ".eml");
@@ -145,7 +145,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testAttachPath() throws Exception {
+    void testAttachPath() throws Exception {
         final EmailAttachment attachment1;
         // Test Success - EmailAttachment
         attachment1 = new EmailAttachment();
@@ -180,13 +180,13 @@ public class MultiPartEmailTest extends AbstractEmailTest {
 
     /** TODO implement test for GetContainer */
     @Test
-    public void testGetContainer() {
+    void testGetContainer() {
         assertTrue(true);
     }
 
     /** Test get/set sub type */
     @Test
-    public void testGetSetSubType() {
+    void testGetSetSubType() {
         for (final String validChar : testCharsValid) {
             email.setSubType(validChar);
             assertEquals(validChar, email.getSubType());
@@ -195,7 +195,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
 
     /** Init called twice should fail */
     @Test
-    public void testInit() {
+    void testInit() {
         email.init();
         // call the init function twice to trigger the IllegalStateException
         assertThrows(IllegalStateException.class, email::init);
@@ -206,7 +206,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
      * @throws IOException    when sending fails
      */
     @Test
-    public void testSend() throws EmailException, IOException {
+    void testSend() throws EmailException, IOException {
         // Test Success
         getMailServer();
 
@@ -257,7 +257,7 @@ public class MultiPartEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testSetMsg() throws EmailException {
+    void testSetMsg() throws EmailException {
         // Test Success
 
         // without charset set
