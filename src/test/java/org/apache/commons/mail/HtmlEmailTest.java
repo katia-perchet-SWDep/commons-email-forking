@@ -455,7 +455,7 @@ class HtmlEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    @Disabled
+    @Disabled("Test is disabled as its result is dependent on the execution order")
     void testSendWithDefaultCharset() throws Exception {
         // Test is disabled as its result is dependent on the execution order:
         // the mail.mime.charset property is normally cached by the MimeUtility
