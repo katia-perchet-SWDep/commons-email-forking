@@ -996,7 +996,7 @@ public abstract class Email {
         try {
             Transport.send(message);
             return message.getMessageID();
-        } catch (final Throwable t) {
+        } catch (final Exception t) {
             throw new EmailException("Sending the email to the following server failed : " + this.getHostName() + ":" + getSmtpPort(), t);
         }
     }
