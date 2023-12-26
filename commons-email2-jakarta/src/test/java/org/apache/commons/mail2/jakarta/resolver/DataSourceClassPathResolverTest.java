@@ -31,10 +31,10 @@ import org.junit.jupiter.api.Test;
  *
  * @since 1.3
  */
-public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverTest {
+class DataSourceClassPathResolverTest extends AbstractDataSourceResolverTest {
 
     @Test
-    public void testResolvingClassPathLenient() throws Exception {
+    void testResolvingClassPathLenient() throws Exception {
         DataSourceResolver dataSourceResolver;
 
         dataSourceResolver = new DataSourceClassPathResolver("/", true);
@@ -51,7 +51,7 @@ public class DataSourceClassPathResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
-    public void testResolvingClassPathNonLenient() throws Exception {
+    void testResolvingClassPathNonLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceClassPathResolver("/", false);
         assertNotNull(dataSourceResolver.resolve("images/asf_logo_wide.gif"));
 

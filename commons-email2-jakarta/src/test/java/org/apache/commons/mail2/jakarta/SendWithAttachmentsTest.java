@@ -34,7 +34,7 @@ import jakarta.mail.internet.MimeUtility;
  *
  * @since 1.0
  */
-public class SendWithAttachmentsTest extends AbstractEmailTest {
+class SendWithAttachmentsTest extends AbstractEmailTest {
     private MockHtmlEmailConcrete email;
 
     @BeforeEach
@@ -48,7 +48,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest {
      * @throws IOException    when sending fails, or a bad URL is used
      */
     @Test
-    public void testSendNoAttachments() throws EmailException, IOException {
+    void testSendNoAttachments() throws EmailException, IOException {
         getMailServer();
 
         final String strSubject = "Test HTML Send #1 Subject (w charset)";
@@ -89,7 +89,7 @@ public class SendWithAttachmentsTest extends AbstractEmailTest {
      * @throws IOException    when sending fails, or a bad URL is used
      */
     @Test
-    public void testSendWAttachments() throws EmailException, IOException {
+    void testSendWAttachments() throws EmailException, IOException {
         final EmailAttachment attachment = new EmailAttachment();
 
         /** File to used to test file attachments (Must be valid) */

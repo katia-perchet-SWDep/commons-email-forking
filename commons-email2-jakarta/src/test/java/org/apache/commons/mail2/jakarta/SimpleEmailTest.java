@@ -36,7 +36,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 1.0
  */
-public class SimpleEmailTest extends AbstractEmailTest {
+class SimpleEmailTest extends AbstractEmailTest {
 
     private MockSimpleEmail email;
 
@@ -47,10 +47,10 @@ public class SimpleEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    @Disabled
-    public void testDefaultMimeCharset() throws EmailException, IOException {
+    @Disabled("disabling this test as it is dependent on execution order")
+    void testDefaultMimeCharset() throws EmailException, IOException {
         /*
-         * disabling this test as it is dependent on execution order. MimeUtility.getDefaultMIMECharset does some internal caching and if mail.mime.charset is
+         * MimeUtility.getDefaultMIMECharset does some internal caching and if mail.mime.charset is
          * not defined, reverts to the default Java charset which is basically the system default file encoding.
          */
         System.setProperty(EmailConstants.MAIL_MIME_CHARSET, StandardCharsets.UTF_8.name());

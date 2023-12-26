@@ -32,7 +32,7 @@ import org.junit.jupiter.api.Test;
  *
  * @since 1.3
  */
-public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverTest {
+class DataSourceCompositeResolverTest extends AbstractDataSourceResolverTest {
 
     private DataSourceResolver[] dataSourceResolvers;
     private DataSourceResolver[] dataSourceResolversMissing;
@@ -47,7 +47,7 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
-    public void testExternalModification() throws Exception {
+    void testExternalModification() throws Exception {
         final DataSourceCompositeResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
         final DataSourceResolver[] arr = dataSourceResolver.getDataSourceResolvers();
@@ -62,7 +62,7 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
-    public void testResolvingFilesLenient() throws Exception {
+    void testResolvingFilesLenient() throws Exception {
         final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolvers, true);
 
         // resolve using HTTP
@@ -73,7 +73,7 @@ public class DataSourceCompositeResolverTest extends AbstractDataSourceResolverT
     }
 
     @Test
-    public void testResolvingFilesNonLenient() {
+    void testResolvingFilesNonLenient() {
         final DataSourceResolver dataSourceResolver = new DataSourceCompositeResolver(dataSourceResolversMissing, false);
 
         assertThrows(IOException.class, () -> dataSourceResolver.resolve("./image/does-not-exist.gif"));
