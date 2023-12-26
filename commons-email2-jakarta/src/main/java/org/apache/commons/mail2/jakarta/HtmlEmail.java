@@ -243,7 +243,7 @@ public class HtmlEmail extends MultiPartEmail {
             // (property "mail.mime.charset") in case none has been set
             msgHtml.setText(html, getCharsetName(), EmailConstants.TEXT_SUBTYPE_HTML);
 
-            // EMAIL-147: work-around for buggy JavaMail implementations;
+
             // in case setText(...) does not set the correct content type,
             // use the setContent() method instead.
             final String contentType = msgHtml.getContentType();
@@ -302,7 +302,6 @@ public class HtmlEmail extends MultiPartEmail {
      * @since 1.1
      */
     public String embed(final DataSource dataSource, final String name) throws EmailException {
-        // check if the DataSource has already been attached;
         // if so, return the cached CID value.
         final InlineImage inlineImage = inlineEmbeds.get(name);
         if (inlineImage != null) {
@@ -391,7 +390,6 @@ public class HtmlEmail extends MultiPartEmail {
             throw new EmailException("couldn't get canonical path for " + file.getName(), e);
         }
 
-        // check if a FileDataSource for this name has already been attached;
         // if so, return the cached CID value.
         final InlineImage inlineImage = inlineEmbeds.get(file.getName());
         if (inlineImage != null) {
@@ -473,7 +471,6 @@ public class HtmlEmail extends MultiPartEmail {
      */
     public String embed(final URL url, final String name) throws EmailException {
         EmailException.checkNonEmpty(name, () -> "Name cannot be null or empty");
-        // check if a URLDataSource for this name has already been attached;
         // if so, return the cached CID value.
         final InlineImage inlineImage = inlineEmbeds.get(name);
         if (inlineImage != null) {

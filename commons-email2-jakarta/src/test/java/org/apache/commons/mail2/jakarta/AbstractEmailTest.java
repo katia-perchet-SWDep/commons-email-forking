@@ -323,7 +323,7 @@ public abstract class AbstractEmailTest {
      */
     protected WiserMessage validateSend(final Wiser mailServer, final String strSubject, final InternetAddress fromAdd, final List<InternetAddress> toAdd,
             final List<InternetAddress> ccAdd, final List<InternetAddress> bccAdd, final boolean boolSaveToFile) throws IOException {
-        assertTrue(mailServer.getMessages().size() == 1, "mail server doesn't contain expected message");
+        assertEquals(1,mailServer.getMessages().size(), "mail server doesn't contain expected message");
         final WiserMessage emailMessage = mailServer.getMessages().get(0);
 
         if (boolSaveToFile) {

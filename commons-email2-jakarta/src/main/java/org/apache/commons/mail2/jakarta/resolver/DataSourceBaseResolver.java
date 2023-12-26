@@ -31,7 +31,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver {
     /**
      * Constructs a new instance.
      */
-    public DataSourceBaseResolver() {
+    protected DataSourceBaseResolver() {
         this.lenient = false;
     }
 
@@ -40,7 +40,7 @@ public abstract class DataSourceBaseResolver implements DataSourceResolver {
      *
      * @param lenient shall we ignore resources not found or throw an exception?
      */
-    public DataSourceBaseResolver(final boolean lenient) {
+    protected DataSourceBaseResolver(final boolean lenient) {
         this.lenient = lenient;
     }
 
