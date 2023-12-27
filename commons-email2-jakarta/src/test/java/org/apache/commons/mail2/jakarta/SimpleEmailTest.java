@@ -88,7 +88,7 @@ class SimpleEmailTest extends AbstractEmailTest {
     }
 
     @Test
-    public void testGetSetMsg() throws EmailException {
+    void testGetSetMsg() throws EmailException {
         // Test Success
         for (final String validChar : testCharsValid) {
             email.setMsg(validChar);
@@ -106,7 +106,7 @@ class SimpleEmailTest extends AbstractEmailTest {
      * @throws IOException    when sending fails TODO Add code to test the popBeforeSmtp() settings
      */
     @Test
-    public void testSend() throws EmailException, IOException {
+    void testSend() throws EmailException, IOException {
         // Test Success
         getMailServer();
 
