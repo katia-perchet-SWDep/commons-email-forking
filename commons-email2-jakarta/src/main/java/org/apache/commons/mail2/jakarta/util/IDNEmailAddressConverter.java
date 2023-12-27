@@ -18,6 +18,7 @@ package org.apache.commons.mail2.jakarta.util;
 
 import java.net.IDN;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import jakarta.mail.internet.InternetAddress;
 
@@ -72,12 +73,14 @@ public class IDNEmailAddressConverter {
         return toString(email, IDN::toASCII);
     }
 
-    private String toString(final String email, final Function<String, String> converter) {
+    private String toString(final String email, final UnaryOperator<String> converter) {
         final int idx = email == null ? -1 : email.indexOf('@');
         if (idx < 0) {
             return email;
         }
-        return getLocalPart(email, idx) + '@' + converter.apply(getDomainPart(email, idx));
+        else {
+            return getLocalPart(email, idx) + '@' + converter.apply(getDomainPart(email, idx));
+        }
     }
 
     /**
