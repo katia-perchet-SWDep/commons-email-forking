@@ -239,7 +239,7 @@ public abstract class Email {
     /**
      * Constructs a new instance.
      */
-    public Email() {
+    protected Email() {
         // empty
     }
 
